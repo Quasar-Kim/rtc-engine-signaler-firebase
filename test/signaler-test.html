@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>sender</h2>
+  <p>
+    <button id="createRoom">create room</button>
+  </p>
+
+  <h2>receiver</h2>
+  <p>
+    <input type="text" id="roomId">
+    <button id="connect">connect</button>
+  </p>
+
+  <h2>send message</h2>
+  <input type="text" id="msg">
+  <button id="sendMsg">send</button>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://ga.jspm.io/npm:firebase@9.6.1/app/dist/index.esm.js",
+        "firebase/firestore": "https://ga.jspm.io/npm:firebase@9.6.1/firestore/dist/index.esm.js"
+      },
+      "scopes": {
+        "https://ga.jspm.io/": {
+          "@firebase/app": "https://ga.jspm.io/npm:@firebase/app@0.7.11/dist/esm/index.esm2017.js",
+          "@firebase/component": "https://ga.jspm.io/npm:@firebase/component@0.5.9/dist/esm/index.esm2017.js",
+          "@firebase/firestore": "https://ga.jspm.io/npm:@firebase/firestore@3.4.1/dist/index.esm2017.js",
+          "@firebase/logger": "https://ga.jspm.io/npm:@firebase/logger@0.3.2/dist/esm/index.esm2017.js",
+          "@firebase/util": "https://ga.jspm.io/npm:@firebase/util@1.4.2/dist/index.esm2017.js",
+          "@firebase/webchannel-wrapper": "https://ga.jspm.io/npm:@firebase/webchannel-wrapper@0.6.1/dist/index.esm2017.js"
+        }
+      }
+    }
+  </script>
+  <script type="module" src="./signaler-test.js"></script>
+</body>
+</html>
