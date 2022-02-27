@@ -32,10 +32,10 @@
     "eslint-plugin-promise": "^5.2.0",
     "rollup": "^2.66.1",
     "rollup-plugin-terser": "^7.0.2",
-    "rtc-engine": "^1.0.0-alpha.0",
+    "rtc-engine": "^1.0.0-alpha.1",
     "terser": "^5.10.0"
   },
   "peerDependencies": {
-    "rtc-engine": "^1.0.0-alpha.0"
+    "rtc-engine": "^1.0.0-alpha.1"
   }
 }
