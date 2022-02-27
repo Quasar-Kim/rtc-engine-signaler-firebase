@@ -9,20 +9,11 @@ async function main () {
     storageBucket: 'rtc-engine-demo.appspot.com',
     messagingSenderId: 'messagingSenderId',
     appId: 'appId'
-  }, true)
-
-  document.querySelector('#createRoom').addEventListener('click', async () => {
-    const roomId = await signaler.createConnection()
-    console.log('room created', roomId)
-  })
-
-  document.querySelector('#connect').addEventListener('click', async () => {
-    const roomId = document.querySelector('#roomId').value
-    await signaler.connect(roomId)
-  })
-
+  }, { emulator: true, port: 8080, id: 'something-new' })
   const engine = new RTCEngine(signaler)
+
   const channel = await engine.channel('chat')
+  channel.on('message', msg => console.log(msg))
 
   document.querySelector('#sendMsg').addEventListener('click', () => {
     const msg = document.querySelector('#msg').value

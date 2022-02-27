@@ -1,9 +1,11 @@
 {
   "name": "rtc-engine-signaler-firebase",
-  "version": "0.5.0",
+  "version": "1.0.0-alpha.0",
   "description": "Signaler using firebase cloud firestore.",
   "main": "src/FirebaseSignaler.js",
   "module": "src/FirebaseSignaler.js",
+  "jsdelivr": "dist/FireBaseSignaler.prod.js",
+  "unpkg": "dist/FireBaseSignaler.prod.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Quasar-Kim/rtc-engine-signaler-firebase.git"
@@ -17,15 +19,23 @@
   "dependencies": {
     "firebase": "^9.6.5"
   },
+  "scripts": {
+    "build": "rollup --config rollup.config.js"
+  },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
-    "rtc-engine": "^0.4.1"
+    "rollup": "^2.66.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rtc-engine": "^1.0.0-alpha.0",
+    "terser": "^5.10.0"
   },
   "peerDependencies": {
-    "rtc-engine": "^0.5.0"
+    "rtc-engine": "^1.0.0-alpha.0"
   }
 }

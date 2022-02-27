@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTCEngine firebase signaler demo</title>
+</head>
+<body>
+  <h2>사용 방법</h2>
+  <p>
+    <ol>
+      <li>두 기기에서 이 데모를 열어주세요.</li>
+      <li>첫번째 기기에서 Peer A 섹션의 create connection 버튼을 누르고 devtool 콘솔을 확인해주세요. 방의 ID가 출력됩니다.</li>
+      <li>두번째 기기에서 Peer B 섹션에 방 ID를 붙여넣고 connect를 눌러주세요.</li>
+      <li>connected! 메시지가 뜨면 세번째 send message에서 WebRTC로 메시지를 전송할 수 있습니다. 받은 메시지는 콘솔에 출력됩니다.</li>
+    </ol>
+
+  </p>
+
+  <h2>Peer A</h2>
+  <p>
+    <button id="createRoom">create connection</button>
+  </p>
+
+  <h2>Peer B</h2>
+  <p>
+    <input type="text" id="roomId">
+    <button id="connect">connect</button>
+  </p>
+
+  <h2>send message</h2>
+  <input type="text" id="msg">
+  <button id="sendMsg">send</button>
+
+  <script type="module">
+    import FirebaseSignaler from 'https://jspm.dev/rtc-engine-signaler-firebase';
+    import RTCEngine, { wait } from 'https://jspm.dev/rtc-engine';
+
+    async function main() {
+      const signaler = new FirebaseSignaler({
+        apiKey: 'AIzaSyDy-G0LbfR_EoF3gE1iDlmUwzWR9sJgHpI',
+        authDomain: 'rtc-engine-demo.firebaseapp.com',
+        projectId: 'rtc-engine-demo',
+        storageBucket: 'rtc-engine-demo.appspot.com',
+        messagingSenderId: '585690637567',
+        appId: '1:585690637567:web:8107d33a313cc18efcd8ca',
+      }, true);
+      const engine = new RTCEngine(signaler, { autoConnect: false });
+    
+      document.querySelector('#createRoom').addEventListener('click', async () => {
+        const roomId = await signaler.createConnection();
+        console.log('room created', roomId);
+        engine.connect();
+      });
+    
+      document.querySelector('#connect').addEventListener('click', async () => {
+        const roomId = document.querySelector('#roomId').value;
+        await signaler.connect(roomId);
+        engine.connect();
+      });
+    
+      await wait(engine.connection).toBe('connected')
+      const channel = await engine.channel('message');
+      alert('connected!');
+    
+      document.querySelector('#sendMsg').addEventListener('click', () => {
+        const msg = document.querySelector('#msg').value;
+        channel.send(msg);
+      });
+    
+      channel.on('message', (msg) => console.log('메시지 받음:', msg));
+    }
+
+    main();
+
+  </script>
+</body>
+</html>
